@@ -73,8 +73,10 @@ class _Base64TableState extends State<Base64Table> {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: Base64Table('base64_encoded_data_here'), // Replace with your base64-encoded data
-  ));
-}
+Subject: Request for Release Letter and NOC
+
+Dear [HR Manager's Name],
+
+I trust this email finds you in good health. I am writing to request a Release Letter and a No Objection Certificate (NOC) from [Company Name]. Please note that a Release Letter is also required to facilitate my transition to new endeavors. Your guidance on the process is appreciated.
+
+Thank you for your assistance.
