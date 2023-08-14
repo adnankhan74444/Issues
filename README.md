@@ -1,9 +1,12 @@
+rjSubject: Urgent: Timely Release of NOC Request
 
-Subject: Request for NOC Update
+Dear [Recipient's Name],
 
-Dear [HR's Name],
+I hope you are well. I need to urgently address the NOC release timeline. Our previous understanding was for the NOC to be issued in the last week before my departure. I've informed my next employer accordingly.
 
-Hope you're well. Could you please provide a quick update on my NOC application? My new employer is awaiting this information. Thanks for your help.
+However, I recently received communication that the NOC would only be provided on my last working day. This delay could jeopardize my new opportunity.
 
-Best regards,
+I kindly request your assistance in ensuring the NOC's timely release as initially agreed, helping me honor my commitments. Your prompt attention is greatly appreciated.
+
+Thank you,
 [Your Name]
