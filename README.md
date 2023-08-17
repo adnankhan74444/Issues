@@ -1,18 +1,68 @@
-Subject: Urgent: Clarification Regarding NOC Timeline and Potential Implications
+import 'package:flutter/material.dart';
 
-Dear [Recipient's Name],
+class HoverWidgetExample extends StatefulWidget {
+  @override
+  _HoverWidgetExampleState createState() => _HoverWidgetExampleState();
+}
 
-I trust this email finds you well. I am writing to discuss a matter of significant concern regarding the No Objection Certificate (NOC) timeline and its potential implications.
+class _HoverWidgetExampleState extends State<HoverWidgetExample> {
+  List<FocusNode> focusNodes = [];
 
-As previously discussed, I informed both my current and prospective employers about the NOC timeline that we had agreed upon. This timeline was integral to my decision to resign from my current position in pursuit of a new opportunity.
+  @override
+  void initState() {
+    super.initState();
+    // Initialize focusNodes list and add listeners
+    for (int i = 0; i < 5; i++) {
+      var focusNode = FocusNode();
+      focusNode.addListener(() {
+        _handleFocusChange(i);
+      });
+      focusNodes.add(focusNode);
+    }
+  }
 
-Recently, I was notified that the NOC's approval process is still pending with the management. This situation raises concerns about the potential risk of missing out on the new opportunity and the possible impact on my career trajectory.
+  @override
+  void dispose() {
+    // Dispose focus nodes and remove listeners when the widget is disposed
+    for (var focusNode in focusNodes) {
+      focusNode.removeListener(_handleFocusChange);
+      focusNode.dispose();
+    }
+    super.dispose();
+  }
 
-While I understand that unforeseen circumstances can arise, I am reaching out to seek clarity and to understand the actions being taken to expedite the NOC approval process. I believe that proactive communication and collaboration can help address this situation and potentially mitigate any negative outcomes.
+  void _handleFocusChange(int index) {
+    // Handle focus changes for a specific widget here
+    print('Focus changed for widget at index $index');
+    setState(() {});
+  }
 
-I appreciate your understanding of the gravity of this matter and your assistance in finding a resolution. Your prompt response would be highly valued in alleviating my concerns.
-
-Thank you for your attention and support.
-
-Best regards,
-[Your Name]
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: HoverWidget(
+          onHover: (isHovered) {
+            // Handle hover state changes here
+          },
+          child: Column(
+            children: List.generate(5, (index) {
+              return InkWell(
+                onTap: () {
+                  // Handle tap event here
+                  focusNodes[index].requestFocus();
+                },
+                child: ListTile(
+                  title: TextField(
+                    focusNode: focusNodes[index], // Associate FocusNode to the TextField
+                    decoration: InputDecoration(labelText: 'Item $index'),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+      ),
+    );
+  }
+}
