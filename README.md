@@ -1,12 +1,55 @@
-Subject: Urgent Request: Timely Release of NOC and Release Letter
+yimport 'package:flutter/material.dart';
 
-Dear [HC Team],
+void main() {
+  runApp(MyApp());
+}
 
-I trust this message finds you in good health. I am writing to kindly request your support in expediting the release of both my No Objection Certificate (NOC) and the Release Letter within this week. This is crucial for me to seamlessly proceed with my next employment process.
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Two-Column List')),
+        body: MyTwoColumnList(),
+      ),
+    );
+  }
+}
 
-I understand the procedures involved and appreciate your cooperation in ensuring a smooth transition. Your prompt action would be invaluable in facilitating my career transition.
+class MyTwoColumnList extends StatelessWidget {
+  final List<int> items = List.generate(10, (index) => index + 1);
 
-Thank you for your understanding and assistance.
-
-Best regards,
-[Your Name]
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          for (int i = 0; i < items.length; i += 2)
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.all(8.0),
+                    color: Colors.blueGrey,
+                    height: 100.0,
+                    alignment: Alignment.center,
+                    child: Text(items[i].toString()),
+                  ),
+                ),
+                if (i + 1 < items.length)
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(8.0),
+                      color: Colors.blueGrey,
+                      height: 100.0,
+                      alignment: Alignment.center,
+                      child: Text(items[i + 1].toString()),
+                    ),
+                  ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+}
