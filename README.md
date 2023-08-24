@@ -1,4 +1,4 @@
-timport 'package:flutter/material.dart';
+dimport 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,51 +9,82 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Custom Two-Column Layout')),
-        body: MyCustomTwoColumnLayout(),
+        appBar: AppBar(title: Text('Rotating Widget in Dialog')),
+        body: Center(child: RotatingWidgetButton()),
       ),
     );
   }
 }
 
-class MyCustomTwoColumnLayout extends StatelessWidget {
-  final List<int> items = List.generate(10, (index) => index + 1);
+class RotatingWidgetButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: RotatingWidget(),
+          ),
+        );
+      },
+      child: Text('Open Dialog'),
+    );
+  }
+}
+
+class RotatingWidget extends StatefulWidget {
+  @override
+  _RotatingWidgetState createState() => _RotatingWidgetState();
+}
+
+class _RotatingWidgetState extends State<RotatingWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  bool _isRotating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                for (int i = 0; i < items.length; i += 2)
-                  Container(
-                    margin: EdgeInsets.all(8.0),
-                    color: Colors.blueGrey,
-                    height: 100.0,
-                    alignment: Alignment.center,
-                    child: Text(items[i].toString()),
-                  ),
-              ],
+    return GestureDetector(
+      onTap: () {
+        if (!_isRotating) {
+          _controller.repeat();
+        } else {
+          _controller.stop();
+        }
+        setState(() {
+          _isRotating = !_isRotating;
+        });
+      },
+      child: RotationTransition(
+        turns: _controller,
+        child: Container(
+          width: 100,
+          height: 100,
+          color: Colors.blue,
+          child: Center(
+            child: Text(
+              'Tap to Rotate',
+              style: TextStyle(color: Colors.white),
             ),
           ),
-          Expanded(
-            child: Column(
-              children: [
-                for (int i = 1; i < items.length; i += 2)
-                  Container(
-                    margin: EdgeInsets.all(8.0),
-                    color: Colors.blueGrey,
-                    height: 100.0,
-                    alignment: Alignment.center,
-                    child: Text(items[i].toString()),
-                  ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
